@@ -16,28 +16,51 @@ func NewHouse(w int, d int, f int) *House {
 	}
 }
 
+func (h *House) SetWindows(w int) {
+	h.window = w
+}
+
+func (h *House) SetDoors(d int) {
+	h.window = d
+}
+
+func (h *House) SetFurniture(f int) {
+	h.window = f
+}
+
 type HouseFacade struct {
+	House *House
 }
 
-func NewHouseFacade() *HouseFacade {
-	return &HouseFacade{}
+func NewHouseFacade(house *House) *HouseFacade {
+	return &HouseFacade{House: house}
 }
 
-func (hf *HouseFacade) BuildSmallHouse() *House {
-	return NewHouse(4, 2, 0)
+func (hf *HouseFacade) SetSmallHouse() {
+	hf.House.SetDoors(2)
+	hf.House.SetWindows(2)
+	hf.House.SetFurniture(2)
 }
 
-func (hf *HouseFacade) BuildMediumHouse() *House {
-	return NewHouse(8, 4, 2)
+func (hf *HouseFacade) SetMediumHouse() {
+	hf.House.SetDoors(4)
+	hf.House.SetWindows(4)
+	hf.House.SetFurniture(4)
 }
 
-func (hf *HouseFacade) BuildBigHouse() *House {
-	return NewHouse(16, 12, 6)
+func (hf *HouseFacade) SetBigHouse() {
+	hf.House.SetDoors(6)
+	hf.House.SetWindows(6)
+	hf.House.SetFurniture(6)
 }
 
 func main() {
-	houseFacade := NewHouseFacade()
-	fmt.Println(houseFacade.BuildSmallHouse())
-	fmt.Println(houseFacade.BuildMediumHouse())
-	fmt.Println(houseFacade.BuildBigHouse())
+	house := NewHouse(0, 0, 0)
+	houseFacade := NewHouseFacade(house)
+	houseFacade.SetSmallHouse()
+	fmt.Println(house)
+	houseFacade.SetMediumHouse()
+	fmt.Println(house)
+	houseFacade.SetBigHouse()
+	fmt.Println(house)
 }
